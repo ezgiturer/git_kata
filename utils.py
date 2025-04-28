@@ -12,6 +12,10 @@ def load_data(filepath):
     """
     try:
         df = pd.read_csv(filepath)
+        if 'sex' in df.columns:
+            df = df[df['sex'] == 'male']
+        else:
+            print("Warning: 'sex' column not found. Returning full dataset.")
         return df
     except FileNotFoundError:
         print(f"Error: File {filepath} not found.")
