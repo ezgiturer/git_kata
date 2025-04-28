@@ -26,3 +26,13 @@ def load_data(filepath):
     except Exception as e:
         print(f"An error occurred: {e}")
         return None
+    
+def clean_data(df):
+# Drop rows with missing values
+    df_cleaned = df.dropna()
+
+    # Convert all categorical columns (object dtype) to lowercase
+    for col in df_cleaned.select_dtypes(include='object').columns:
+        df_cleaned[col] = df_cleaned[col].str.lower()
+
+    return df_cleaned
